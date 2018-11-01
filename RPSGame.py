@@ -56,7 +56,7 @@ while player is False:
         if play_again == "No":
             print("Game Over")
             continue_playing = False
-        # Don't return here (you returned the input), I really don't think that what you wanted
+        # Don't return here (you returned the input)
 
         print("Not a valid option. Check again, and check you spelling\n")
 
