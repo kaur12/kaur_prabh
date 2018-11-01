@@ -4,16 +4,46 @@ from random import randint
 choises = ["Rock", "Paper", "Scissors"]
 player = False
 
-computer_lives = "3"
-player_lives = "3"
+computer_lives = 5
+player_lives = 5
 
 # make the computer pick one item at random
 computer = choises[randint(0, 2)]
+
+
+#define a win or lose function instead of the procedural way
+def winorlose(status):
+    #handle win or lose based on the status we pass in
+    print("Called the win or lose fuunction")
+    print("***********************")
+    print("You", status, "!", "Would you like to play again?")
+    choice = input("Y / N:")
+
+    if choice == "Y" or choice =="y":
+        #reset the game
+        ##change global variables
+        global player_lives
+        global computer_lives
+        global player
+        global computer
+
+        computer_lives = 5
+        player_lives = 5
+        player = False
+        computer = choises[randint(0,2)]
+
+    elif choice == "N" or choice =="n":
+        print("You choose to quit")
+        exit()
 
 # show the computer's choise in the terminal window
 print("Computer chooses: ", computer)
 
 while player is False:
+    print("****************************************")
+    print("player_lives:", player_lives, "/5")
+    print("AI_lives:", computer_lives, "/5")
+    print("****************************************")
     player = input("Rock, Paper or Scissors?\n")
     print("Player chooses:", player)
 
@@ -24,41 +54,40 @@ while player is False:
     elif (player == "Rock"):
         if computer == "Paper":
             #computer won
-            print("You lose", computer, "covers", player)
-            player_lives == "player_lives - 1"
+            player_lives -= 1
+            print("You lose", computer, "covers", player, "\n")
         else:
-            print("You win!", player, "smahes", computer)
-            computer_lives == "computer_lives - 1"
+            print("You win!", player, "smahes", computer, "\n")
+            computer_lives -= 1
 
     elif player == "Paper":
         if computer == "Scissors":
-            print("You lose!", computere, "cuts", player)
-            player_lives == "player_live - 1"
+            player_lives -= 1
+            print("You lose!", computer, "cuts", player, "\n")
         else:
-            print("You win!", player, "covers", computer)
-            computer_lives == "computer_lives - 1"
+            print("You win!", player, "covers", computer, "\n")
+            computer_lives -= 1
 
     elif player == "Scissors":
         if computer =="Rock":
-            print("You lose!", computer, "smashes", player)
-            player_lives == "player_lives - 1"
+            player_lives -= 1
+            print("You lose!", computer, "smashes", player, "\n")
         else:
-            print("You win!", player, "cuts", computer)
-            computer_lives == "computer_lives - 1"
+            print("You win!", player, "cuts", computer, "\n")
+            computer_lives -= 1
 
     elif player =="Quit":
         exit()
-    if lives =="0":
-        play_again = input("Play again?")
-        while play_again not in ("Yes","No"):  # validate user input
-            print("Please try again")
-            play_again = input("Play again?")
-        if play_again == "No":
-            print("Game Over")
-            continue_playing = False
-        # Don't return here (you returned the input)
 
+    else:
         print("Not a valid option. Check again, and check you spelling\n")
+
+    #handle win or lose
+    if player_lives is 0:
+        winorlose("lost")
+
+    elif computer_lives is 0:
+        winorlose("won")        
 
     player = False
     computer = choises[randint(0, 2)]
